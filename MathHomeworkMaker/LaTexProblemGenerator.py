@@ -49,22 +49,19 @@ def generateQuestions(x, problemSet, problemSetAns, fileName):
         if ans[len(ans) - 3:len(ans)] == '.00':
             ans = ans[:-3]
 
-        if j == 0:
+        if j % 35 == 0:
             problemSet.write(fileName + '\\\\\n')
             problemSetAns.write(fileName + '\\\\\n')
 
-            problemSet.write('\\begin{enumerate}\n')
-            problemSetAns.write('\\begin{enumerate}\n')
+            problemSet.write('\\begin{enumerate}[resume]\n')
+            problemSetAns.write('\\begin{enumerate}[resume]\n')
 
-        problemSet.write('  \item $' + problem.printformula() + '$\\\\\n')
-        problemSetAns.write('  \item $' + problem.printformula() + ans + '$\\\\\n')
+        problemSet.write('  \item $' + problem.printformula() + '$\n')
+        problemSetAns.write('  \item $' + problem.printformula() + ans + '$\n')
 
         i += 1
         j += 1
 
-        if j == 35:
+        if j % 35 == 0 and not x % 35 == 0:
             problemSet.write('\\end{enumerate}\n')
             problemSetAns.write('\\end{enumerate}\n')
-            j = 0
-
-

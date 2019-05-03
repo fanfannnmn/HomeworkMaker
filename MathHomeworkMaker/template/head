@@ -12,11 +12,16 @@
 %SetFonts
 
 %
-%Doublespacing
+%Doublespacing and multiple column
 %
 \usepackage{multicol}
 \usepackage{setspace}
 \doublespacing
+
+%
+% Listing
+%
+\usepackage{enumitem}
 
 \title{Problem Set}
 \author{H.A.G.S.}
