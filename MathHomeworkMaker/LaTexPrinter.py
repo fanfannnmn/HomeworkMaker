@@ -1,4 +1,5 @@
 import LaTexProblemGenerator
+import argparse
 import subprocess
 import os
 import tempfile
@@ -10,9 +11,21 @@ current = os.getcwd()
 if not os.path.exists(current + '/output'):
     os.makedirs(current + '/output')
 
+parser = argparse.ArgumentParser()
+parser.add_argument('-n', '--number-of-questions', help='Number of questions you want to generate', required=False)
+parser.add_argument('-o', '--output-file-name', help='Output filename with timestamp', required=False)
+args = parser.parse_args()
+
 # Generate Problems
-numberOfQuestions = input('Please Enter Number of Questions: ')
-fileName = 'ProblemSet' + time.strftime("%Y%m%d%H%M%S")
+if args.number_of_questions is not None:
+    numberOfQuestions = args.number_of_questions
+else:
+    numberOfQuestions = input('Please Enter Number of Questions: ')
+
+if args.output_file_name is not None:
+    fileName = args.output_file_name + time.strftime(" %Y%m%d%H%M%S")
+else:
+    fileName = 'ProblemSet ' + time.strftime("%Y%m%d%H%M%S")
 
 f = open('output/' + fileName + '.tex', 'w')
 fa = open('output/' + fileName + 'Ans.tex', 'w')
