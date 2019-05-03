@@ -26,8 +26,9 @@ class Formula():
         return '%i %s %i =' % (self.num1, self.operation[self.oCode], self.num2)
 
 
-def generateQuestions(x, problemSet, problemSetAns):
+def generateQuestions(x, problemSet, problemSetAns, fileName):
     i = 0
+    j = 0
     while i < x:
         problem = Formula()
         problem.num1 = randint(0, 100)
@@ -48,6 +49,22 @@ def generateQuestions(x, problemSet, problemSetAns):
         if ans[len(ans) - 3:len(ans)] == '.00':
             ans = ans[:-3]
 
+        if j == 0:
+            problemSet.write(fileName + '\\\\\n')
+            problemSetAns.write(fileName + '\\\\\n')
+
+            problemSet.write('\\begin{enumerate}\n')
+            problemSetAns.write('\\begin{enumerate}\n')
+
         problemSet.write('  \item $' + problem.printformula() + '$\\\\\n')
         problemSetAns.write('  \item $' + problem.printformula() + ans + '$\\\\\n')
+
         i += 1
+        j += 1
+
+        if j == 35:
+            problemSet.write('\\end{enumerate}\n')
+            problemSetAns.write('\\end{enumerate}\n')
+            j = 0
+
+

@@ -5,6 +5,11 @@ import tempfile
 import shutil
 import time
 
+# Create Output Directory (iff not exist)
+current = os.getcwd()
+if not os.path.exists(current + '/output'):
+    os.makedirs(current + '/output')
+
 # Generate Problems
 numberOfQuestions = input('Please Enter Number of Questions: ')
 fileName = 'ProblemSet' + time.strftime("%Y%m%d%H%M%S")
@@ -17,7 +22,7 @@ for line in temp:
     f.write(line)
     fa.write(line)
 
-LaTexProblemGenerator.generateQuestions(int(numberOfQuestions), f, fa)
+LaTexProblemGenerator.generateQuestions(int(numberOfQuestions), f, fa, fileName)
 
 temp = open('template/tail', 'r')
 for line in temp:
@@ -29,7 +34,6 @@ f.close()
 fa.close()
 
 # Compile LaTex File
-current = os.getcwd()
 temp = tempfile.mkdtemp()
 os.chdir(temp)
 printout = [fileName, fileName + 'Ans']
