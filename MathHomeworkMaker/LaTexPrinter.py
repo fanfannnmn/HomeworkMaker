@@ -20,20 +20,23 @@ args = parser.parse_args()
 if args.number_of_questions is not None:
     numberOfQuestions = args.number_of_questions
 else:
-    numberOfQuestions = input('Please Enter Number of Questions: ')
+    numberOfQuestions = input('Please Enter Number of Questions (Default 100): ')
 
 if args.output_file_name is not None:
-    fileName = args.output_file_name + time.strftime(" %Y%m%d%H%M%S")
+    fileName = args.output_file_name + ' ' + time.strftime("%Y%m%d%H%M%S")
 else:
     fileName = 'ProblemSet ' + time.strftime("%Y%m%d%H%M%S")
 
 f = open('output/' + fileName + '.tex', 'w')
-fa = open('output/' + fileName + 'Ans.tex', 'w')
+fa = open('output/' + fileName + '_Answer.tex', 'w')
 
 temp = open('template/head', 'r')
 for line in temp:
     f.write(line)
     fa.write(line)
+
+if int(numberOfQuestions) < 1:
+    numberOfQuestions = 100
 
 LaTexProblemGenerator.generateQuestions(int(numberOfQuestions), f, fa, fileName)
 
@@ -49,7 +52,7 @@ fa.close()
 # Compile LaTex File
 temp = tempfile.mkdtemp()
 os.chdir(temp)
-printout = [fileName, fileName + 'Ans']
+printout = [fileName, fileName + '_Answer']
 
 for x in printout:
     proc = subprocess.Popen(['pdflatex', current + '/output/' + x + '.tex'])

@@ -1,6 +1,7 @@
 from random import randint
 
-class Formula():
+
+class Formula:
     num1 = 0
     num2 = 0
     ans = 0.0
@@ -12,7 +13,7 @@ class Formula():
         self.num1 = self.num2
         self.num2 = x
 
-    def getanswer(self):
+    def getAnswer(self):
         if self.oCode == 0:
             self.ans = self.num1 + self.num2
         if self.oCode == 1:
@@ -22,7 +23,7 @@ class Formula():
         if self.oCode == 3:
             self.ans = self.num1 / self.num2
 
-    def printformula(self):
+    def printFormula(self):
         return '%i %s %i =' % (self.num1, self.operation[self.oCode], self.num2)
 
 
@@ -44,7 +45,7 @@ def generateQuestions(x, problemSet, problemSetAns, fileName):
         while 1 < problem.oCode < 4 and (problem.num2 < 2 or problem.num2 > 10):
             problem.num2 = randint(2, 10)
 
-        problem.getanswer()
+        problem.getAnswer()
         ans = ' %.2f' % problem.ans
         if ans[len(ans) - 3:len(ans)] == '.00':
             ans = ans[:-3]
@@ -56,8 +57,8 @@ def generateQuestions(x, problemSet, problemSetAns, fileName):
             problemSet.write('\\begin{enumerate}[resume]\n')
             problemSetAns.write('\\begin{enumerate}[resume]\n')
 
-        problemSet.write('  \item $' + problem.printformula() + '$\n')
-        problemSetAns.write('  \item $' + problem.printformula() + ans + '$\n')
+        problemSet.write('  \item $' + problem.printFormula() + '$\n')
+        problemSetAns.write('  \item $' + problem.printFormula() + ans + '$\n')
 
         i += 1
         j += 1

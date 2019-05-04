@@ -8,7 +8,7 @@
 
 ## How To Use It
 
-`python3 LaTexPrinter.py LaTexPrinter.py [-h] [-n NUMBER_OF_QUESTIONS] [-o OUTPUT_FILE_NAME]`
+`python3 LaTexPrinter.py [-h] [-n NUMBER_OF_QUESTIONS] [-o OUTPUT_FILE_NAME]`
 
 ```
 optional arguments:
