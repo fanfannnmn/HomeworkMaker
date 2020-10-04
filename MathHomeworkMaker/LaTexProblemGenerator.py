@@ -5,7 +5,7 @@ class Formula:
     num1 = 0
     num2 = 0
     ans = 0.0
-    operation = ['+', '-', '\\times', '\\div']
+    operation = ["+", "-", "\\times", "\\div"]
     oCode = 0
 
     def swap(self):
@@ -24,10 +24,10 @@ class Formula:
             self.ans = self.num1 / self.num2
 
     def printFormula(self):
-        return '%i %s %i =' % (self.num1, self.operation[self.oCode], self.num2)
+        return "{} {} {} =".format(self.num1, self.operation[self.oCode], self.num2)
 
 
-def generateQuestions(x, problemSet, problemSetAns, fileName):
+def generateQuestions(x, problemSet, problemSetAns, file_name):
     i = 0
     j = 0
     while i < x:
@@ -46,23 +46,23 @@ def generateQuestions(x, problemSet, problemSetAns, fileName):
             problem.num2 = randint(2, 10)
 
         problem.getAnswer()
-        ans = ' %.2f' % problem.ans
-        if ans[len(ans) - 3:len(ans)] == '.00':
+        ans = "{:.2f}".format(problem.ans)
+        if ans[len(ans) - 3:len(ans)] == ".00":
             ans = ans[:-3]
 
         if j % 35 == 0:
-            problemSet.write(fileName + '\\\\\n')
-            problemSetAns.write(fileName + '\\\\\n')
+            problemSet.write("{}\\\\\n".format(file_name))
+            problemSetAns.write("{}\\\\\n".format(file_name))
 
-            problemSet.write('\\begin{enumerate}[resume]\n')
-            problemSetAns.write('\\begin{enumerate}[resume]\n')
+            problemSet.write("\\begin{enumerate}[resume]\n")
+            problemSetAns.write("\\begin{enumerate}[resume]\n")
 
-        problemSet.write('  \item $' + problem.printFormula() + '$\n')
-        problemSetAns.write('  \item $' + problem.printFormula() + ans + '$\n')
+        problemSet.write("  \item ${}$\n".format(problem.printFormula()))
+        problemSetAns.write("  \item ${}{}$\n".format(problem.printFormula(), ans))
 
         i += 1
         j += 1
 
         if j % 35 == 0 and not x % 35 == 0:
-            problemSet.write('\\end{enumerate}\n')
-            problemSetAns.write('\\end{enumerate}\n')
+            problemSet.write("\\end{enumerate}\n")
+            problemSetAns.write("\\end{enumerate}\n")
